@@ -13,4 +13,4 @@ test:
 
 .PHONY: clean
 clean:
-	rm -f bin/badgeify:
+	rm -f bin/badgeify

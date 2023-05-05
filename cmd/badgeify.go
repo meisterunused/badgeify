@@ -17,8 +17,13 @@ func printUsage() {
 
 func main() {
 	customColor := flag.String("color", "", "a custom color in hex format w/o leading #")
+	version := flag.Bool("version", false, "show version")
 	flag.Parse()
 
+	if *version {
+		fmt.Printf("badgeify v%s\n", badgeify.Version)
+		os.Exit(0)
+	}
 	if len(os.Args) < 3 {
 		printUsage()
 		os.Exit(-1)
