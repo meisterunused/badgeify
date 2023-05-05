@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="{{ .Width }}" height="{{ .Height }}">
+  <linearGradient id="b" x2="0" y2="100%">
+    <stop offset="0" stop-color="#ggg" stop-opacity=".1"/>
+    <stop offset="1" stop-opacity=".1"/>
+  </linearGradient>
+  <mask id="mask">
+    <rect width="{{ .Width }}" height="{{ .Height }}" rx="3" fill="#fff"/>
+  </mask>
+  <g mask="url(#mask)">
+    <path fill="#555" d="{{ .BackgroundPath }}"/>
+    <path fill="#{{ .Color }}" d="{{ .ColorPath }}"/>
+    <path fill="url(#b)" d="M0 {{ .ForegroundPath }}"/>
+  </g>
+  <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">
+    <text x="{{ sum .LabelStart 1 }}" y="15" fill="#010101" fill-opacity=".3">{{ .Label }}</text>
+    <text x="{{ .LabelStart }}" y="14">{{ .Label }}</text>
+  </g>
+  <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">
+    <text x="{{ sum .ValueStart 1 }}" y="15" fill="#010101" fill-opacity=".3">{{ .Value }}</text>
+    <text x="{{ .ValueStart }}" y="14">{{ .Value }}</text>
+  </g>
+</svg>
