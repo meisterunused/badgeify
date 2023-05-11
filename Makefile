@@ -5,7 +5,7 @@ bin/badgeify:
 
 .PHONY: run
 run:
-	@go run cmd/badgeify.go "coverage" "89%" > test.svg
+	@go run cmd/badgeify.go > test.svg
 
 .PHONY: test
 test:

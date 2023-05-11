@@ -54,22 +54,22 @@ func TestCustomColor(t *testing.T) {
 	badge := New("works", "fine")
 	badge.CustomColor = "ababab"
 	if badge.Color() != "ababab" {
-		t.Errorf("Got default color #%s, want #ababab", badge.Color())
+		t.Errorf("Got custom color #%s, want #ababab", badge.Color())
 	}
 }
 
 func TestColorRange(t *testing.T) {
 	color := New("ok", "89").Color()
 	if color != ColorRange[85] {
-		t.Errorf("Got default color #%s, want > 85", color)
+		t.Errorf("Got color #%s, want > 85", color)
 	}
 	color = New("not good", "75").Color()
 	if color != ColorRange[75] {
-		t.Errorf("Got default color #%s, want > 75", color)
+		t.Errorf("Got color #%s, want > 75", color)
 	}
 	color = New("bad", "60").Color()
 	if color != ColorRange[0] {
-		t.Errorf("Got default color #%s, want > 0", color)
+		t.Errorf("Got color #%s, want > 0", color)
 	}
 }
 

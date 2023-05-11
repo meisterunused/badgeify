@@ -1,12 +1,13 @@
 
 # badgeify
 
-Create a badge (SVG) from label and value.
+Create a badge (SVG) by coverage results, or by custom color, label and value.
 
 ```sh
 # Usage
-$ badgeify "coverage" "80%" > coverage-master.svg
-$ badgeify --color "cc00cc" "works" "well" > coverage-well-done.svg
+$ badgeify > coverage.svg # find coverage results and create badge
+$ badgeify --value "80%" > coverage-master.svg # provide value
+$ badgeify --color "cc00cc" --label "works" --value "well" > well-done.svg
 
 # Development
 $ make test # run testsuite

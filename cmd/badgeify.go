@@ -10,28 +10,39 @@ import (
 
 func printUsage() {
 	usage := `Usage:
-  $ badgeify "coverage" "80%" > coverage-master.svg
-  $ badgeify --color cdcdcd "works" "ok" > coverage-master.svg`
+  $ badgeify # lookup coverage automatically
+  $ badgeify --label "coverage" --value "80%" > coverage-master.svg
+  $ badgeify --color cdcdcd --label "works" --value "ok" > coverage-master.svg`
 	fmt.Println(usage)
 }
 
 func main() {
-	customColor := flag.String("color", "", "a custom color in hex format w/o leading #")
+	help := flag.Bool("help", false, "show help")
 	version := flag.Bool("version", false, "show version")
+	label := flag.String("label", "coverage", "label (default: coverage)")
+	value := flag.String("value", "", "value")
+	color := flag.String("color", "", "a custom color in hex format w/o leading #")
+
 	flag.Parse()
 
 	if *version {
 		fmt.Printf("badgeify v%s\n", badgeify.Version)
 		os.Exit(0)
 	}
-	if len(os.Args) < 3 {
+	if *help {
 		printUsage()
-		os.Exit(-1)
+		os.Exit(0)
 	}
 
-	badge := badgeify.New(os.Args[len(os.Args)-2], os.Args[len(os.Args)-1])
-	if *customColor != "" {
-		badge.CustomColor = *customColor
+	if *value == "" {
+		cov, _ := badgeify.LookupCoverage()
+		autoValue := fmt.Sprintf("%d%%", int(cov))
+		value = &autoValue
+	}
+
+	badge := badgeify.New(*label, *value)
+	if *color != "" {
+		badge.CustomColor = *color
 	}
 	if err := badge.Print(os.Stdout); err != nil {
 		panic(err)
